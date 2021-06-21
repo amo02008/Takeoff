@@ -9,10 +9,13 @@ const routes = require('./routes');
 //Express Setup
 const app = express();
 
-app.use(express.static(__dirname));
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 //db config
 const connectionString = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.84m2b.mongodb.net/Cluster0?retryWrites=true&w=majority`;
@@ -36,5 +39,5 @@ app.use(routes);
 
 //setting port for server use
 const PORT = process.env.PORT || 3030;
-
+// app listener
 app.listen(PORT, () => console.log(`Server listening on port ${PORT} !`));

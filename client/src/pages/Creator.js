@@ -22,18 +22,26 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "90%",
-    marginLeft: theme.spacing(3),
+    width: "100%",
+    maxWidth: 360,
+   
+    // marginLeft: theme.spacing(3),
     marginTop: theme.spacing(3),
-  
+
   },
   date: {
     width: '50%'
-    
+
   },
   button: {
-    alignItems:"center"
+    alignItems: "center"
+  },
+  heading :{
+    marginTop: "25px",
+    marginBottom: "25px",
+    padding: "5px"
   }
+  
 }));
 
 export default function ItineraryCreator(props) {
@@ -76,16 +84,17 @@ export default function ItineraryCreator(props) {
   return (
     <Container fixed>
       <Typography
+      className={classes.heading}
         variant="h2"
         align="center"
         style={{
           textDecoration: "none",
-          color: "#113034",
+          color: "#95b4bc",
           fontFamily: "aw-conqueror-didot",
-          fontWeight: "900",
-          fontSize: "5rem",
+          fontWeight: "850",
+          fontSize: "4rem",
           fontStyle: "normal",
-          marginTop: "50px",
+                   
         }}
       >
         {" "}
@@ -95,7 +104,7 @@ export default function ItineraryCreator(props) {
       <Container fixed>
         <Paper>
           <form onSubmit={handleSubmit}>
-            <Grid container>
+            <Grid container align="center">
               <Grid item xs={12}>
                 <TextField
                   className={classes.root}
@@ -120,8 +129,9 @@ export default function ItineraryCreator(props) {
                 />
               </Grid>
 
+              <Grid container>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                   <KeyboardDatePicker
                     className={classes.date}
                     margin="normal"
@@ -137,8 +147,9 @@ export default function ItineraryCreator(props) {
                   />
                 </Grid>
 
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                   <KeyboardDatePicker
+                    className={classes.date}
                     margin="normal"
                     id="ending-date"
                     label="End Date"
@@ -152,18 +163,20 @@ export default function ItineraryCreator(props) {
                   />
                 </Grid>
               </MuiPickersUtilsProvider>
+              </Grid>
 
-              <Button
-              className={classes.button}
-              
-                variant="contained"
-                color="primary"
-                size="large"
-                startIcon={<FlightTakeoffIcon />}
-                onClick={handleSubmit}
-              >
-                Takeoff
+              <Grid item xs>
+                <Button
+                  className={classes.button}
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  startIcon={<FlightTakeoffIcon />}
+                  onClick={handleSubmit}
+                >
+                  Takeoff
               </Button>
+              </Grid>
             </Grid>
           </form>
         </Paper>
